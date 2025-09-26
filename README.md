@@ -4,7 +4,7 @@
 Un jeu de mémoire interactif basé sur Arduino UNO, avec 4 LED colorées, 4 boutons, un buzzer (haut-parleur d'écouteur) et un écran OLED. Le programme génère une séquence lumineuse et sonore aléatoire que le joueur doit reproduire. Le score augmente avec chaque succès, et une animation de visage pleurant avec musique de fin s'active en cas d'échec. Relancez une partie en appuyant sur les boutons de droite à gauche.
 
 ![Setup du jeu](memory_game.jpg)  
-*Vue du montage : Arduino UNO connecté à une breadboard avec 4 LED (jaune, rouge, orangée, bleu), 4 boutons, un buzzer et un écran OLED.*
+*Vue du montage : Arduino UNO connecté à une breadboard avec 4 LED (jaune, orangée, noir, bleu), 4 boutons, un buzzer et un écran OLED.*
 
 ## ⚙️ Matériel utilisé
 - 🟦 **Arduino UNO**
