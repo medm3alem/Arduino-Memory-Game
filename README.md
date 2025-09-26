@@ -8,7 +8,7 @@ Un jeu de mémoire interactif basé sur Arduino UNO, avec 4 LED colorées, 4 bou
 
 ## ⚙️ Matériel utilisé
 - 🟦 **Arduino UNO**
-- 💡 **4 LED colorées** (jaune, rouge, orangée, bleu)
+- 💡 **4 LED colorées** (jaune, orangée, noir, bleu)
 - 🔘 **4 boutons poussoirs**
 - 🔊 **Haut-parleur d'écouteur (utilisé comme buzzer)**
 - 🖥️ **Écran OLED SSD1306 (128x64 pixels)**
