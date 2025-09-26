@@ -1,57 +1,69 @@
-# 🔋 Bako Motors Battery SoC Monitor
+# 🎮 Arduino Memory Game avec OLED & Boutons
 
-## 📌 Contexte
-Ce projet a été développé pour **Bako Motors** afin de surveiller en temps réel le **State of Charge (SoC)** d’une batterie.  
-La communication se fait via le **bus CAN** (CAN High & CAN Low) en interrogeant le **BMS** (Battery Management System) avec des requêtes CAN spécifiques, puis en affichant le résultat sur un **écran OLED I2C SSD1306**.
+Un jeu de mémoire interactif réalisé avec **Arduino Uno**, où le joueur doit reproduire une séquence de lumières et de sons générés aléatoirement.  
+Chaque manche ajoute un nouveau défi à la séquence. Une erreur et la partie est terminée !
 
-![Vue d'ensemble du montage avec écran OLED affichant SoC = 1](path/to/image1.jpg)  
-*Assemblage complet : Arduino UNO connecté à une breadboard avec boutons, LED, écran OLED I2C affichant "SoC 1", et connexions visibles.*
+![Prototype](memory_game.jpg)
 
-![Vue rapprochée des composants et connexions](path/to/image2.jpg)  
-*Vue détaillée : Écran OLED SSD1306 affichant "SoC 1", 4 boutons poussoirs (rouge, jaune, bleu, noir), LED allumée (verte), et breadboard avec câblages.*
+---
 
-## ⚙️ Matériel utilisé
-- 🟦 **Arduino UNO**  
-- 📡 **Module MCP_CAN (MCP2515 + TJA1050)**  
-- 🖥️ **Écran OLED I2C SSD1306 (128x64 pixels)**  
-- 🔘 **4 boutons poussoirs** (optionnels pour interactions avancées)  
-- 💡 **LED indicateurs** (pour feedback visuel)  
-- 🔋 Batterie avec **BMS compatible CAN** (Bako Motors, ex. LiFePO4 60V 50Ah)  
+## ✨ Fonctionnalités
 
-## 🛠️ Fonctionnalités principales
-- Envoi de **requêtes CAN** vers l’ID correspondant du BMS.  
-- Réception et décodage des **réponses CAN** contenant l’état de charge (SoC).  
-- Affichage du niveau de batterie en **%** sur l’écran OLED.  
-- Intégration de boutons et LED pour une interface interactive (ex. navigation ou reset).  
+- 4 **LEDs colorées** et 4 **boutons associés**
+- **Haut-parleur (écouteur utilisé comme buzzer)** pour générer des mélodies
+- **Écran OLED SSD1306** pour afficher le score et les animations
+- **Séquence aléatoire** de lumières et sons
+- **Affichage du score en direct**
+- **Game Over** avec un visage triste 😢 et une musique de fin
+- **Musique d’introduction et jeu de lumières**
+- **Redémarrage du jeu** en appuyant sur tous les boutons de droite à gauche
 
-## 📂 Organisation du code
-Le code source se trouve dans [`CAN_OLED.ino`](CAN_OLED.ino).  
-*(Note : Mise à jour pour utiliser Adafruit_SSD1306 au lieu de LiquidCrystal_I2C.)*
+---
 
-## 🔧 Dépendances
-Ce projet utilise les bibliothèques Arduino suivantes :  
+## 🛠️ Matériel utilisé
 
-- [`mcp_can`](https://github.com/coryjfowler/MCP_CAN_lib) : pour la communication CAN avec le MCP2515  
-- `Adafruit_GFX` et `Adafruit_SSD1306` : pour contrôler l’écran OLED via I2C  
+- Arduino Uno  
+- 4 LEDs colorées (jaune, orangée, noir, bleu)  
+- 4 boutons poussoirs  
+- 4 résistances pour les boutons/LEDs  
+- 1 écouteur ou petit haut-parleur (buzzer improvisé 🎵)  
+- 1 écran OLED SSD1306 (I2C)  
+- Breadboards & câbles Dupont  
 
-### Installation
-- Ouvrir l’IDE Arduino  
-- Aller dans **Sketch → Include Library → Manage Libraries...**  
-- Rechercher et installer :  
-  - **MCP_CAN_lib** (par Cory J. Fowler)  
-  - **Adafruit GFX Library**  
-  - **Adafruit SSD1306**  
+---
 
-## 🚀 Utilisation
-1. Connecter le module MCP_CAN à l’Arduino UNO (SPI : pins 10, 11, 12, 13).  
-2. Relier **CAN_H** et **CAN_L** du MCP2515 au bus CAN de la batterie.  
-3. Brancher l’écran OLED I2C (SDA → A4, SCL → A5 sur Arduino UNO, adresse I2C 0x3C).  
-4. Connecter les boutons et LED aux pins appropriés (ex. boutons sur 2-5, LED sur 6-9).  
-5. Charger et téléverser le code `CAN_OLED.ino` dans l’Arduino.  
-6. Mettre sous tension la batterie → le SoC s’affiche sur l’écran OLED (ex. "SoC 1").  
+## 📸 Aperçu du jeu
 
-## 👨‍💻 Auteur
-Projet réalisé par **[Ton nom]**, pour **Bako Motors**, 2025.  
+- **Écran Score**  
+  ![Score](score.jpg)
 
-## 📜 Licence
-Ce projet est distribué sous la licence [MIT](LICENSE).
+- **Game Over (visage triste)**  
+  ![Game Over](pleure.jpg)
+
+---
+
+## 🚀 Comment jouer
+
+1. Lancer l’Arduino : une **musique d’introduction** joue et un petit jeu de lumière démarre.  
+2. Une LED s’allume et joue sa **tone** → appuyer sur le bouton correspondant.  
+3. À chaque manche, une nouvelle LED s’ajoute à la séquence → répéter toute la suite !  
+4. Si vous vous trompez → **Game Over** avec animation et musique de fin.  
+5. Pour rejouer → appuyez sur tous les boutons **de droite à gauche** (jaune → orangée → noir → bleu).  
+
+---
+
+## 📂 Structure du projet
+
+- `LED_game.ino` → code Arduino du jeu  
+- `memory_game.jpg` → photo du montage complet  
+- `score.jpg` → capture OLED affichant le score  
+- `pleure.jpg` → capture OLED affichant le visage triste  
+
+---
+
+## 📖 Installation
+
+1. Cloner ce dépôt  
+   ```bash
+   git clone https://github.com/<ton-user>/<ton-repo>.git
+   cd <ton-repo>
