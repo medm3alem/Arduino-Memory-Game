@@ -6,7 +6,7 @@ Un jeu de mémoire interactif basé sur Arduino UNO, avec 4 LED colorées, 4 bou
 ![Setup du jeu](memory_game.jpg)  
 *Vue du montage : Arduino UNO connecté à une breadboard avec 4 LED (jaune, rouge, orangée, bleu), 4 boutons, un buzzer et un écran OLED.*
 
-<video controls>
+<video controls width="560" height="315">
   <source src="game.mp4" type="video/mp4">
   Votre navigateur ne supporte pas la vidéo.
 </video>  
