@@ -1,45 +1,57 @@
-# 🎮 Arduino Memory Game
+# 🔋 Bako Motors Battery SoC Monitor
 
-## 📝 Description
-Un jeu de mémoire interactif basé sur Arduino UNO, avec 4 LED colorées, 4 boutons, un buzzer (haut-parleur d'écouteur) et un écran OLED. Le programme génère une séquence lumineuse et sonore aléatoire que le joueur doit reproduire. Le score augmente avec chaque succès, et une animation de visage pleurant avec musique de fin s'active en cas d'échec. Relancez une partie en appuyant sur les boutons de droite à gauche.
+## 📌 Contexte
+Ce projet a été développé pour **Bako Motors** afin de surveiller en temps réel le **State of Charge (SoC)** d’une batterie.  
+La communication se fait via le **bus CAN** (CAN High & CAN Low) en interrogeant le **BMS** (Battery Management System) avec des requêtes CAN spécifiques, puis en affichant le résultat sur un **écran OLED I2C SSD1306**.
 
-![Setup du jeu](memory_game.jpg)  
-*Vue du montage : Arduino UNO connecté à une breadboard avec 4 LED (jaune, orangée, noir, bleu), 4 boutons, un buzzer et un écran OLED.*
+![Vue d'ensemble du montage avec écran OLED affichant SoC = 1](path/to/image1.jpg)  
+*Assemblage complet : Arduino UNO connecté à une breadboard avec boutons, LED, écran OLED I2C affichant "SoC 1", et connexions visibles.*
+
+![Vue rapprochée des composants et connexions](path/to/image2.jpg)  
+*Vue détaillée : Écran OLED SSD1306 affichant "SoC 1", 4 boutons poussoirs (rouge, jaune, bleu, noir), LED allumée (verte), et breadboard avec câblages.*
 
 ## ⚙️ Matériel utilisé
-- 🟦 **Arduino UNO**
-- 💡 **4 LED colorées** (jaune, orangée, noir, bleu)
-- 🔘 **4 boutons poussoirs**
-- 🔊 **Haut-parleur d'écouteur (utilisé comme buzzer)**
-- 🖥️ **Écran OLED SSD1306 (128x64 pixels)**
+- 🟦 **Arduino UNO**  
+- 📡 **Module MCP_CAN (MCP2515 + TJA1050)**  
+- 🖥️ **Écran OLED I2C SSD1306 (128x64 pixels)**  
+- 🔘 **4 boutons poussoirs** (optionnels pour interactions avancées)  
+- 💡 **LED indicateurs** (pour feedback visuel)  
+- 🔋 Batterie avec **BMS compatible CAN** (Bako Motors, ex. LiFePO4 60V 50Ah)  
 
 ## 🛠️ Fonctionnalités principales
-- Génération aléatoire d'une séquence de LED et de sons.
-- Affichage du score sur l'écran OLED.
-- Vérification des entrées utilisateur via les boutons.
-- Animation de visage pleurant et musique de fin en cas d'échec.
-- Relance du jeu en appuyant sur les boutons dans l'ordre (droite à gauche).
+- Envoi de **requêtes CAN** vers l’ID correspondant du BMS.  
+- Réception et décodage des **réponses CAN** contenant l’état de charge (SoC).  
+- Affichage du niveau de batterie en **%** sur l’écran OLED.  
+- Intégration de boutons et LED pour une interface interactive (ex. navigation ou reset).  
 
 ## 📂 Organisation du code
-Le code source se trouve dans [`LED_game.ino`](LED_game.ino).
+Le code source se trouve dans [`CAN_OLED.ino`](CAN_OLED.ino).  
+*(Note : Mise à jour pour utiliser Adafruit_SSD1306 au lieu de LiquidCrystal_I2C.)*
 
 ## 🔧 Dépendances
-Ce projet utilise les bibliothèques Arduino suivantes :
-- `Wire.h` : pour la communication I2C avec l'écran OLED
-- `Adafruit_GFX.h` : pour les graphismes sur l'écran
-- `Adafruit_SSD1306.h` : pour contrôler l'écran OLED
+Ce projet utilise les bibliothèques Arduino suivantes :  
+
+- [`mcp_can`](https://github.com/coryjfowler/MCP_CAN_lib) : pour la communication CAN avec le MCP2515  
+- `Adafruit_GFX` et `Adafruit_SSD1306` : pour contrôler l’écran OLED via I2C  
 
 ### Installation
-1. Ouvrir l'IDE Arduino.
-2. Aller dans **Sketch → Include Library → Manage Libraries...**.
-3. Rechercher et installer :
-   - **Adafruit_GFX**
-   - **Adafruit_SSD1306**
+- Ouvrir l’IDE Arduino  
+- Aller dans **Sketch → Include Library → Manage Libraries...**  
+- Rechercher et installer :  
+  - **MCP_CAN_lib** (par Cory J. Fowler)  
+  - **Adafruit GFX Library**  
+  - **Adafruit SSD1306**  
 
 ## 🚀 Utilisation
-1. Connecter les LED aux pins 8, 10, 11, 12 (voir code pour correspondance des couleurs).
-2. Connecter les boutons aux pins 5, 2, 3, 4 avec des résistances pull-up internes.
-3. Brancher le buzzer au pin 9.
-4. Connecter l'écran OLED via I2C (SDA → A4, SCL → A5 sur Arduino UNO, adresse I2C 0x3C).
-5. Téléverser le code `LED_game.ino` dans l'Arduino.
-6. Mettre sous tension : le jeu commence avec une séquence d'animation, puis attend les entrées du joueur.
+1. Connecter le module MCP_CAN à l’Arduino UNO (SPI : pins 10, 11, 12, 13).  
+2. Relier **CAN_H** et **CAN_L** du MCP2515 au bus CAN de la batterie.  
+3. Brancher l’écran OLED I2C (SDA → A4, SCL → A5 sur Arduino UNO, adresse I2C 0x3C).  
+4. Connecter les boutons et LED aux pins appropriés (ex. boutons sur 2-5, LED sur 6-9).  
+5. Charger et téléverser le code `CAN_OLED.ino` dans l’Arduino.  
+6. Mettre sous tension la batterie → le SoC s’affiche sur l’écran OLED (ex. "SoC 1").  
+
+## 👨‍💻 Auteur
+Projet réalisé par **[Ton nom]**, pour **Bako Motors**, 2025.  
+
+## 📜 Licence
+Ce projet est distribué sous la licence [MIT](LICENSE).
