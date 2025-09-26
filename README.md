@@ -6,12 +6,6 @@ Un jeu de mémoire interactif basé sur Arduino UNO, avec 4 LED colorées, 4 bou
 ![Setup du jeu](memory_game.jpg)  
 *Vue du montage : Arduino UNO connecté à une breadboard avec 4 LED (jaune, rouge, orangée, bleu), 4 boutons, un buzzer et un écran OLED.*
 
-<video controls width="560" height="315">
-  <source src="game.mp4" type="video/mp4">
-  Votre navigateur ne supporte pas la vidéo.
-</video>  
-*Démo vidéo du jeu en action, montrant les séquences lumineuses, les sons et l'animation de fin.*
-
 ## ⚙️ Matériel utilisé
 - 🟦 **Arduino UNO**
 - 💡 **4 LED colorées** (jaune, rouge, orangée, bleu)
@@ -49,9 +43,3 @@ Ce projet utilise les bibliothèques Arduino suivantes :
 4. Connecter l'écran OLED via I2C (SDA → A4, SCL → A5 sur Arduino UNO, adresse I2C 0x3C).
 5. Téléverser le code `LED_game.ino` dans l'Arduino.
 6. Mettre sous tension : le jeu commence avec une séquence d'animation, puis attend les entrées du joueur.
-
-## 👨‍💻 Auteur
-Projet réalisé par **[Ton nom]**, 2025.
-
-## 📜 Licence
-Ce projet est distribué sous la licence [MIT](LICENSE).
